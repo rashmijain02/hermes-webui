@@ -1,0 +1,41 @@
+{
+  "extensions": [
+    {
+      "id": "personadesk",
+      "name": "PersonaDesk Workbench",
+      "description": "Read-only Workbench drawer beside the chat: work queue, drafts awaiting review and their evidence for one PersonaDesk persona.",
+      "scripts": [
+        "personadesk.js"
+      ],
+      "stylesheets": [
+        "personadesk.css"
+      ],
+      "permissions": {
+        "network_external": false,
+        "storage": {
+          "owned": true
+        }
+      },
+      "settings_schema": [
+        {
+          "key": "open_on_load",
+          "type": "boolean",
+          "label": "Open the Workbench when WebUI loads",
+          "default": false
+        },
+        {
+          "key": "refresh_after_turn",
+          "type": "boolean",
+          "label": "Refresh the Workbench after each chat turn",
+          "default": true
+        }
+      ],
+      "sidecar": {
+        "type": "loopback",
+        "origin": "http://127.0.0.1:8765",
+        "health_path": "/health",
+        "proxy_auth": "token-v1"
+      }
+    }
+  ]
+}
