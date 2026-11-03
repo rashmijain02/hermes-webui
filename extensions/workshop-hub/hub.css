@@ -1,0 +1,105 @@
+/* Workshop Hub. Every rule is scoped to extension-owned elements (#workshop-hub, .wh-*). */
+
+.wh-toggle {
+  position: fixed;
+  top: 12px;
+  right: 140px; /* leaves room for the Workshop 5 Workbench button at right: 16px */
+  z-index: 900;
+  padding: 6px 12px;
+  border: 1px solid var(--border, #d0d0d0);
+  border-radius: 999px;
+  background: var(--surface, #fff);
+  color: var(--text, #1a1a1a);
+  font: 600 13px system-ui, sans-serif;
+  cursor: pointer;
+}
+.wh-toggle[aria-expanded="true"] { background: var(--accent, #0b57d0); color: var(--accent-contrast, #fff); }
+.wh-root button:focus-visible, .wh-toggle:focus-visible, .wh-doc-link:focus-visible {
+  outline: 2px solid var(--accent, #0b57d0);
+  outline-offset: 2px;
+}
+
+.wh-root {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg, #fff);
+  color: var(--text, #1a1a1a);
+  font: 14px/1.5 system-ui, sans-serif;
+}
+.wh-root[hidden] { display: none !important; }
+
+.wh-topbar { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 20px; border-bottom: 1px solid var(--border, #e0e0e0); }
+.wh-title { margin: 0; font-size: 1.2em; }
+.wh-subtitle { margin: 2px 0 0; color: var(--muted, #666); font-size: 0.9em; }
+.wh-actions { display: flex; gap: 6px; }
+.wh-icon-btn { width: 32px; height: 32px; border: 1px solid var(--border, #d0d0d0); border-radius: 6px; background: transparent; color: inherit; font-size: 16px; cursor: pointer; }
+
+.wh-layout { flex: 1; display: grid; grid-template-columns: 280px 1fr; min-height: 0; }
+.wh-side { overflow: auto; border-right: 1px solid var(--border, #e0e0e0); padding: 12px; }
+.wh-main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+
+.wh-list { display: grid; gap: 6px; }
+.wh-item { display: grid; gap: 2px; text-align: left; padding: 8px 10px; border: 1px solid var(--border, #e0e0e0); border-radius: 8px; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.wh-item:hover { background: var(--surface2, #f3f4f6); }
+.wh-item-selected { border-color: var(--accent, #0b57d0); box-shadow: inset 3px 0 0 var(--accent, #0b57d0); }
+.wh-item-label, .wh-kicker { color: var(--muted, #666); font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.04em; margin: 0; }
+.wh-item-title { font-weight: 600; }
+.wh-item-meta { margin: 0; }
+
+.wh-chip { display: inline-block; margin: 2px 4px 0 0; padding: 0 8px; border-radius: 999px; border: 1px solid currentColor; background: transparent; color: inherit; opacity: 0.85; font-size: 0.75em; }
+.wh-status-built { background: var(--success, #1e7d3a); border-color: transparent; color: #fff; opacity: 1; }
+.wh-status-partial { background: var(--warning, #8a5a00); border-color: transparent; color: #fff; opacity: 1; }
+.wh-status-planned { border-style: dashed; }
+
+.wh-errors { margin-top: 16px; padding: 8px; border: 1px solid var(--danger, #b3261e); border-radius: 8px; font-size: 0.85em; }
+.wh-errors[hidden] { display: none; }
+.wh-errors h3 { margin: 0 0 6px; font-size: 1em; color: var(--danger, #b3261e); }
+.wh-error ul { margin: 4px 0 8px; padding-left: 18px; }
+
+.wh-heading { padding: 16px 20px 8px; }
+.wh-workshop-title { margin: 2px 0 4px; font-size: 1.3em; }
+.wh-tabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 0 20px 8px; border-bottom: 1px solid var(--border, #e0e0e0); }
+.wh-tab { padding: 4px 12px; border: 1px solid var(--border, #d0d0d0); border-radius: 6px; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.wh-tab[aria-selected="true"] { border-color: var(--accent, #0b57d0); background: var(--accent, #0b57d0); color: #fff; }
+.wh-body { flex: 1; overflow: auto; padding: 16px 20px 32px; max-width: 980px; }
+
+.wh-summary { font-size: 1.05em; margin-top: 0; }
+.wh-facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; }
+.wh-facts dt { color: var(--muted, #666); }
+.wh-facts dd { margin: 0; }
+.wh-link-btn { margin: 0 6px 4px 0; padding: 0; border: 0; background: none; color: var(--accent, #0b57d0); font: inherit; text-decoration: underline; cursor: pointer; }
+.wh-ready { list-style: none; padding: 0; }
+.wh-ready li { margin: 4px 0; }
+.wh-ready-mark { display: inline-block; width: 1.4em; font-weight: 700; }
+.wh-ok .wh-ready-mark { color: var(--success, #1e7d3a); }
+.wh-missing .wh-ready-mark { color: var(--muted, #888); }
+.wh-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.wh-doc-picker { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.wh-doc-btn { padding: 3px 10px; border: 1px solid var(--border, #d0d0d0); border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: 0.9em; cursor: pointer; }
+.wh-doc-btn[aria-current="true"] { border-color: var(--accent, #0b57d0); color: var(--accent, #0b57d0); font-weight: 600; }
+.wh-md { overflow-wrap: anywhere; }
+.wh-md table { border-collapse: collapse; margin: 8px 0; }
+.wh-md th, .wh-md td { border: 1px solid var(--border, #e0e0e0); padding: 4px 8px; vertical-align: top; }
+.wh-md pre, .wh-cmd pre, .wh-plain { overflow: auto; padding: 8px 10px; border-radius: 6px; background: var(--code-bg, #f6f8fa); }
+.wh-doc-link { color: var(--accent, #0b57d0); text-decoration: underline; cursor: pointer; }
+.wh-dead-link { color: inherit; text-decoration: underline dotted; cursor: help; }
+
+.wh-cmd, .wh-prompt { margin: 8px 0 12px; padding: 10px 12px; border: 1px solid var(--border, #e0e0e0); border-radius: 8px; }
+.wh-cmd-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+.wh-cmd-head .wh-copy { margin-left: auto; }
+.wh-copy { padding: 2px 10px; border: 1px solid var(--border, #d0d0d0); border-radius: 6px; background: transparent; color: inherit; font: inherit; font-size: 0.85em; cursor: pointer; }
+.wh-cmd pre { margin: 6px 0 0; }
+
+.wh-msg, .wh-meta { color: var(--muted, #666); }
+.wh-meta { font-size: 0.85em; }
+.wh-msg-error { color: var(--danger, #b3261e); }
+
+@media (max-width: 760px) {
+  .wh-toggle { top: auto; bottom: 84px; right: 16px; }
+  .wh-layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .wh-side { max-height: 30vh; border-right: 0; border-bottom: 1px solid var(--border, #e0e0e0); }
+}
